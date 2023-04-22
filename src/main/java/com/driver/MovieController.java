@@ -24,7 +24,7 @@ public class MovieController {
         return new ResponseEntity(answer,HttpStatus.CREATED);
     }
     @GetMapping("/get-movie-by-name/{name}")
-    public ResponseEntity getMovieByname(@PathVariable String name){
+    public ResponseEntity getMovieByName(@PathVariable String name){
         Optional<Movie> op=movieService.getMovieByName(name);
         if(op.isPresent()){
             return new ResponseEntity(op.get(),HttpStatus.FOUND);
@@ -32,7 +32,7 @@ public class MovieController {
         return new ResponseEntity("Movie Not found",HttpStatus.NOT_FOUND);
     }
     @GetMapping("/get-director-by-name/{name}")
-    public ResponseEntity getDirectorByname(@PathVariable String name){
+    public ResponseEntity getDirectorByName(@PathVariable String name){
         Optional<Director> op=movieService.getDirectorByName(name);
         if(op.isPresent()){
             return new ResponseEntity(op.get(),HttpStatus.FOUND);
