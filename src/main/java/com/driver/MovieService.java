@@ -43,8 +43,10 @@ public class MovieService {
         return movieList;
     }
 
-    public String addMovieDirectorPair(String directorName, String movieName) {
-        String answer= movieRepository.addMovieDirectorPair(directorName,movieName);
+    public String addMovieDirectorPair(String movieName, String directorName) {
+        String answer= movieRepository.addMovieDirectorPair(movieName,directorName);
+       Optional<Director> op=getDirectorByName(directorName);
+       op.get().setNumberOfMovies(op.get().getNumberOfMovies()+1);
         return answer;
     }
 

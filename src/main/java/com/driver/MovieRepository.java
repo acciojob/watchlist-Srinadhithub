@@ -59,7 +59,7 @@ public class MovieRepository {
         return movieList;
     }
 
-    public String addMovieDirectorPair(String directorName, String movieName) {
+    public String addMovieDirectorPair(String movieName, String directorName) {
         if(!directorMovieDB.containsKey(directorName)){
             List<String> movieList= new ArrayList<>();
             movieList.add(movieName);
@@ -68,6 +68,7 @@ public class MovieRepository {
         else{
             directorMovieDB.get(directorName).add(movieName);
         }
+
         return "successfully added";
     }
 
