@@ -7,13 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-
-/*Pair an existing movie and director: PUT /movies/add-movie-director-pair
-Pass movie name and director name as request parameters
-Return success message wrapped in a ResponseEntity object
-Controller Name - addMovieDirectorPair*/
-
-
 @RequestMapping("/movies")
 @Controller
 public class MovieController {
@@ -61,15 +54,6 @@ public class MovieController {
         String answer=movieService.addMovieDirectorPair(directorName,movieName);
         return new ResponseEntity(answer,HttpStatus.CREATED);
     }
-//    Delete a director and its movies from the records: DELETE /movies/delete-director-by-name
-//    Pass director’s name as request parameter
-//    Return success message wrapped in a ResponseEntity object
-//    Controller Name - deleteDirectorByName
-//
-//    Delete all directors and all movies by them from the records: DELETE /movies/delete-all-directors
-//    No params or body required
-//    Return success message wrapped in a ResponseEntity object
-//    Controller Name - deleteAllDirectors
     @DeleteMapping("/delete-director-by-name")
     public ResponseEntity deleteDirectorByName(@RequestParam String name){
         String answer=movieService.deleteDirectorByName(name);

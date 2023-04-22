@@ -9,7 +9,7 @@ import java.util.*;
 
 @Repository
 public class MovieRepository {
-    HashMap<String, Movie> movieDB = new HashMap<>();
+     HashMap<String, Movie> movieDB = new HashMap<>();
     HashMap<String, Director> directorDB = new HashMap<>();
     HashMap<String, List<String>> directorMovieDB = new HashMap<>();
 
@@ -17,13 +17,13 @@ public class MovieRepository {
         String moviename = movie.getName();
 
         movieDB.put(moviename, movie);
-        return "success";
+        return "successfully movie added";
     }
 
     public String addDirector(Director director) {
         String directorname = director.getName();
         directorDB.put(directorname, director);
-        return "success";
+        return "successfully director added";
     }
 
     public List<Movie> getAllMovies() {
@@ -54,7 +54,7 @@ public class MovieRepository {
         List<String> movieList =new ArrayList<>();
         for(String directorname:directorMovieDB.keySet())
             if (directorname.equals(name)) {
-                movieList = directorMovieDB.get(directorname);
+                return directorMovieDB.get(directorname);
             }
         return movieList;
     }
@@ -68,31 +68,41 @@ public class MovieRepository {
         else{
             directorMovieDB.get(directorName).add(movieName);
         }
-        return "success";
+        return "successfully added";
     }
 
-    public String deleteDirectorByName(String directorName) {
+    public  String deleteDirectorByName(String directorName) {
         if(directorMovieDB.containsKey(directorName)){
             List<String> moviesByDirector=directorMovieDB.get(directorName);
             for(String movieName: moviesByDirector){
-                deleleByMovieName(movieName);
+                deleteByMovieName(movieName);
             }
+            directorMovieDB.remove(directorName);
         }
+        if(directorDB.containsKey(directorName))
         directorDB.remove(directorName);
-        directorMovieDB.remove(directorName);
-        return "success";
+        return "successfully deleted";
     }
 
-    private void deleleByMovieName(String movieName) {
+    public void deleteByMovieName(String movieName) {
         if(movieDB.containsKey(movieName)){
             movieDB.remove(movieName);
         }
     }
-
     public String deleteAllDirectors() {
-        for(String directorName : directorDB.keySet()){
-            deleteDirectorByName(directorName);
+        List<String> directorsList=new ArrayList<>();
+        for(String directorname:directorDB.keySet()){
+            directorsList.add(directorname);
         }
-        return "success";
+        for(String directorName:directorsList){
+            if(directorMovieDB.containsKey(directorName)){
+                List<String> moviesByDirector=directorMovieDB.get(directorName);
+                for(String movieName: moviesByDirector){
+                    deleteByMovieName(movieName);
+                }
+            }
+            directorDB.clear();
+            directorMovieDB.clear();}
+        return "successfully deleted all directors";
     }
-}
+ }

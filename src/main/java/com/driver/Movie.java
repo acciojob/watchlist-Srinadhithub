@@ -20,7 +20,7 @@ public class Movie {
     }
 
     public int getDurationInMinutes() {
-        return durationInMinutes;
+        return this.durationInMinutes;
     }
 
     public void setDurationInMinutes(int durationInMinutes) {
@@ -28,7 +28,7 @@ public class Movie {
     }
 
     public double getImdbRating() {
-        return imdbRating;
+        return this.imdbRating;
     }
 
     public void setImdbRating(double imdbRating) {
